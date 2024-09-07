@@ -8,12 +8,14 @@
         <!-- include Firebase SDK -->
         <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
-        
+        <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+
         <script>
             // Firebase config
             const firebaseConfig = {
                 apiKey: "AIzaSyA2vJAKkmXJggEJTwMnEOdwwSeK6PnOnn8",
                 authDomain: "solarbot-1d299.firebaseapp.com",
+                databaseURL: "https://solarbot-1d299-default-rtdb.europe-west1.firebasedatabase.app/",
                 projectId: "solarbot-1d299",
                 storageBucket: "solarbot-1d299.appspot.com",
                 messagingSenderId: "752851957745",
@@ -25,26 +27,67 @@
 
             // Make auth and database references
             const auth = firebase.auth();
+            const db = firebase.database();
         </script>
 
         <style>
             body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
+                font-family: Arial, sans-serif;
+                text-align: center;
+                padding: 20px;
             }
 
             h1 {
-            color: #333;
+                color: #333;
+            }
+
+            /* Grille avec 2 colonnes par ligne */
+            .robot-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
+                gap: 20px; /* Espace entre les cartes */
+                padding: 20px;
+                justify-items: center;
+            }
+
+            /* Style pour chaque carte de robot */
+            .robot-card {
+                background-color: #f4f4f4;
+                border: 2px solid #ccc;
+                border-radius: 10px;
+                padding: 20px;
+                width: 150px;
+                height: 150px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+                transition: transform 0.3s ease;
+            }
+
+            .robot-card:hover {
+                transform: scale(1.05);
+            }
+
+            .robot-name {
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            .robot-ip {
+                font-size: 14px;
+                color: #555;
             }
 
             .button {
-            padding: 15px 30px;
-            font-size: 18px;
-            margin: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+                padding: 15px 30px;
+                font-size: 18px;
+                margin: 10px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
             }
 
             .button.forward { background-color: #03ac1f; color: white; }
@@ -53,7 +96,7 @@
             .button.right { background-color: #03ac1f; color: white; }
 
             .button:hover {
-            opacity: 0.8;
+                opacity: 0.8;
             }
         </style>
     </head>
@@ -74,34 +117,88 @@
         <!--LOGIN FORM-->
         <form id="login-form" style="display: none;">
             <div class="form-elements-container">
-            <label for="input-email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Username" id="input-email" required>
-    
-            <label for="input-password"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" id="input-password" required>
-    
-            <button type="submit" id="login-button">Login</button>
-            <p id="error-message" style="color:red;"></p>
+                <label for="input-email"><b>Email</b></label>
+                <input type="text" placeholder="Enter Username" id="input-email" required>
+        
+                <label for="input-password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" id="input-password" required>
+        
+                <button type="submit" id="login-button">Login</button>
+                <p id="error-message" style="color:red;"></p>
             </div>
         </form>
 
+        <!-- Liste des robots (affichée après connexion) -->
+        <div id="robot-grid" class="robot-grid" style="display: none;">
+            <!-- Les cartes des robots seront insérées ici -->
+        </div>
+
+        <!--Panneau de contrôle des robots (boutons de commande)-->
         <div id="control-panel" style="display: none;">
             <button class="button forward" onclick="sendCommand('forward')">Avancer</button><br>
-            <button class="button backward" onclick="sendCommand('backward')">Reculer</button><br>
             <button class="button left" onclick="sendCommand('left')">Tourner à gauche</button>
             <button class="button right" onclick="sendCommand('right')">Tourner à droite</button>
+            <button class="button backward" onclick="sendCommand('backward')">Reculer</button><br>
         </div>
 
         <script>
+            // Fonction pour récupérer la liste des robots depuis Firebase et générer des cartes
+            function loadRobots() {
+                const robotsRef = db.ref("robots");
+                robotsRef.once('value', (snapshot) => {
+                    const robots = snapshot.val();
+                    const robotGrid = document.getElementById('robot-grid');
+                    robotGrid.innerHTML = ''; // Vider l'intérieur pour éviter les doublons
+
+                    for (const robot in robots) {
+                        const robotData = robots[robot];
+
+                        // Créer une carte pour chaque robot
+                        const robotCard = document.createElement('div');
+                        robotCard.classList.add('robot-card');
+
+                        // Ajouter le nom du robot
+                        const robotName = document.createElement('div');
+                        robotName.classList.add('robot-name');
+                        robotName.innerText = robotData.name;
+
+                        // Ajouter l'adresse IP du robot
+                        const robotIP = document.createElement('div');
+                        robotIP.classList.add('robot-ip');
+                        robotIP.innerText = `IP: ${robotData.ip}`;
+
+                        // Ajouter les éléments à la carte
+                        robotCard.appendChild(robotName);
+                        robotCard.appendChild(robotIP);
+
+                        // Ajouter la carte au conteneur
+                        robotGrid.appendChild(robotCard);
+
+                        // Optionnel: Ajouter un événement de clic sur la carte
+                        robotCard.addEventListener('click', function() {
+                            alert(`Connecté à ${robotData.name} avec l'IP ${robotData.ip}`);
+                            // Afficher le panneau de contrôle après la sélection du robot
+                            document.getElementById('control-panel').style.display = 'block';
+                        });
+                    }
+
+                    // Afficher la grille des robots après le chargement
+                    robotGrid.style.display = 'grid';
+                });
+            }
+
+            document.addEventListener("DOMContentLoaded", function() {
+                loadRobots();
+            });
+
+            // Fonction pour envoyer des commandes au robot
             function sendCommand(command) {
-            // Placeholder for command sending logic
-            alert('Commande envoyée : ' + command);
-            // Dans l'étape suivante, nous remplacerons ce alert par un fetch HTTP
+                alert('Commande envoyée : ' + command);
+                // Placeholder pour la future logique de commande (ex: fetch HTTP)
             }
         </script>
 
         <!--INCLUDE JS FILES-->
-            <script src="scripts/auth.js"></script>
-
+        <script src="scripts/auth.js"></script>
     </body>
 </html>
