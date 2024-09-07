@@ -1,20 +1,20 @@
-function setupUI(user) 
-{
+function setupUI(user) {
     const loginForm = document.getElementById('login-form');
     const authenticationBar = document.getElementById('authentication-bar');
     const userDetails = document.getElementById('user-details');
-    const logoutLink = document.getElementById('logout-link');
-    
+    const controlPanel = document.getElementById('control-panel');  // Référence des boutons de contrôle
+
     if (user) {
         // Si l'utilisateur est connecté
         loginForm.style.display = 'none';           // Masquer le formulaire de connexion
         authenticationBar.style.display = 'block';  // Afficher la barre d'authentification
+        controlPanel.style.display = 'block';       // Afficher les boutons de contrôle
         userDetails.innerText = user.email;         // Afficher l'email de l'utilisateur
-        logoutLink.style.display = 'inline';        // Activer le lien de déconnexion
     } else {
         // Si l'utilisateur est déconnecté
-        loginForm.style.display = 'block';         // Afficher le formulaire de connexion
-        authenticationBar.style.display = 'none';  // Masquer la barre d'authentification
+        loginForm.style.display = 'block';          // Afficher le formulaire de connexion
+        authenticationBar.style.display = 'none';   // Masquer la barre d'authentification
+        controlPanel.style.display = 'none';        // Masquer les boutons de contrôle
     }
 }
 

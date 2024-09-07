@@ -85,10 +85,12 @@
             </div>
         </form>
 
-        <button class="button forward" onclick="sendCommand('forward')">Avancer</button><br>
-        <button class="button backward" onclick="sendCommand('backward')">Reculer</button><br>
-        <button class="button left" onclick="sendCommand('left')">Tourner à gauche</button>
-        <button class="button right" onclick="sendCommand('right')">Tourner à droite</button>
+        <div id="control-panel" style="display: none;">
+            <button class="button forward" onclick="sendCommand('forward')">Avancer</button><br>
+            <button class="button backward" onclick="sendCommand('backward')">Reculer</button><br>
+            <button class="button left" onclick="sendCommand('left')">Tourner à gauche</button>
+            <button class="button right" onclick="sendCommand('right')">Tourner à droite</button>
+        </div>
 
         <script>
             function sendCommand(command) {
