@@ -15,7 +15,7 @@
             const firebaseConfig = {
                 apiKey: "AIzaSyA2vJAKkmXJggEJTwMnEOdwwSeK6PnOnn8",
                 authDomain: "solarbot-1d299.firebaseapp.com",
-                databaseURL: "https://solarbot-1d299-default-rtdb.europe-west1.firebasedatabase.app",
+                databaseURL: "https://solarbot-1d299-default-rtdb.europe-west1.firebasedatabase.app/",
                 projectId: "solarbot-1d299",
                 storageBucket: "solarbot-1d299.appspot.com",
                 messagingSenderId: "752851957745",
@@ -24,7 +24,7 @@
 
             // Initialize firebase
             firebase.initializeApp(firebaseConfig);
-
+            
             // Initialize Firebase authentication
             const auth = firebase.auth();  
 
@@ -47,7 +47,7 @@
             .robot-grid {
                 display: none; /* Cacher la grille par défaut */
                 grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
-                gap: 10px; /* Espace entre les cartes */
+                gap: 20px; /* Espace entre les cartes */
                 padding: 20px;
                 justify-items: center;
             }
@@ -100,31 +100,6 @@
             .button:hover {
                 opacity: 0.8;
             }
-
-            /* Centrer la carte sélectionnée */
-            .selected-card {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 200px;
-                height: 200px;
-                transition: all 0.5s ease;
-            }
-
-            /* Back button */
-            .back-button {
-                position: absolute;
-                top: 20px;
-                left: 20px;
-                background-color: #555;
-                color: white;
-                border: none;
-                padding: 10px;
-                border-radius: 5px;
-                cursor: pointer;
-                font-size: 16px;
-            }
         </style>
     </head>
 
@@ -132,9 +107,6 @@
         <div class="topnav">
             <h1>Robot Control</h1>
         </div>
-
-        <!-- Back button to go back to robot selection -->
-        <button id="back-button" class="back-button" style="display: none;" onclick="showRobotSelection()">← Retour</button>
 
         <!--AUTHENTICATION BAR (USER DETAILS/LOGOUT BUTTON)-->
         <div id="authentication-bar" style="display: none;">
@@ -206,50 +178,15 @@
 
                         // Ajouter un événement de clic sur la carte
                         robotCard.addEventListener('click', function() {
-                            selectRobot(robotCard, robotData);
+                            alert(`Connecté à ${robotData.name} avec l'IP ${robotData.ip}`);
+                            // Afficher le panneau de contrôle après la sélection du robot
+                            document.getElementById('control-panel').style.display = 'block';
                         });
                     }
 
                     // Afficher la grille des robots après le chargement
                     robotGrid.style.display = 'grid';
                 });
-            }
-
-            // Fonction pour sélectionner un robot
-            function selectRobot(robotCard, robotData) {
-                // Masquer les autres robots
-                const robotGrid = document.getElementById('robot-grid');
-                const robots = robotGrid.children;
-                for (let i = 0; i < robots.length; i++) {
-                    robots[i].style.display = 'none';
-                }
-
-                // Centrer la carte sélectionnée
-                robotCard.classList.add('selected-card');
-
-                // Afficher le panneau de contrôle
-                document.getElementById('control-panel').style.display = 'block';
-
-                // Afficher le bouton retour
-                document.getElementById('back-button').style.display = 'block';
-
-                alert(`Connecté à ${robotData.name} avec l'IP ${robotData.ip}`);
-            }
-
-            // Fonction pour revenir à la sélection de robots
-            function showRobotSelection() {
-                const robotGrid = document.getElementById('robot-grid');
-                const robots = robotGrid.children;
-
-                // Afficher tous les robots
-                for (let i = 0; i < robots.length; i++) {
-                    robots[i].style.display = 'flex';
-                    robots[i].classList.remove('selected-card');
-                }
-
-                // Masquer les boutons de commande et le bouton retour
-                document.getElementById('control-panel').style.display = 'none';
-                document.getElementById('back-button').style.display = 'none';
             }
 
             // Fonction pour envoyer des commandes au robot
@@ -261,6 +198,5 @@
 
         <!--INCLUDE JS FILES-->
         <script src="scripts/auth.js"></script>
-
     </body>
 </html>
