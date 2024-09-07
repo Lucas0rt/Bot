@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contrôle du Robot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .button {
+      padding: 15px 30px;
+      font-size: 18px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .button.forward { background-color: #4CAF50; color: white; }
+    .button.backward { background-color: #f44336; color: white; }
+    .button.left { background-color: #2196F3; color: white; }
+    .button.right { background-color: #FF9800; color: white; }
+
+    .button:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <h1>Contrôle du Robot</h1>
+
+  <button class="button forward" onclick="sendCommand('forward')">Avancer</button><br>
+  <button class="button backward" onclick="sendCommand('backward')">Reculer</button><br>
+  <button class="button left" onclick="sendCommand('left')">Tourner à gauche</button>
+  <button class="button right" onclick="sendCommand('right')">Tourner à droite</button>
+
+  <script>
+    function sendCommand(command) {
+      // Placeholder for command sending logic
+      alert('Commande envoyée : ' + command);
+      // Dans l'étape suivante, nous remplacerons ce alert par un fetch HTTP
+    }
+  </script>
+</body>
+</html>
