@@ -7,6 +7,7 @@ function setupUI(user) {
 
     if (user) {
         // Si l'utilisateur est connecté
+        console.log("Utilisateur connecté : ", user.email);
         loginForm.style.display = 'none';           // Masquer le formulaire de connexion
         authenticationBar.style.display = 'block';  // Afficher la barre d'authentification
         userDetails.innerText = user.email;         // Afficher l'email de l'utilisateur
@@ -15,6 +16,7 @@ function setupUI(user) {
         loadRobots();                               // Charger les cartes de robots
     } else {
         // Si l'utilisateur est déconnecté
+        console.log("Utilisateur non connecté.");
         loginForm.style.display = 'block';          // Afficher le formulaire de connexion
         authenticationBar.style.display = 'none';   // Masquer la barre d'authentification
         controlPanel.style.display = 'none';        // Masquer les boutons de contrôle
@@ -26,11 +28,11 @@ document.addEventListener("DOMContentLoaded", function() {
     // Écouter les changements d'état de l'authentification
     auth.onAuthStateChanged(user => {
         if (user) {
-            console.log("user logged in");
-            setupUI(user);  // Mettre à jour l'interface
+            console.log("User is logged in");
+            setupUI(user);  // Mettre à jour l'interface après connexion
         } else {
-            console.log("user logged out");
-            setupUI();      // Mettre à jour l'interface (utilisateur déconnecté)
+            console.log("User is logged out");
+            setupUI();      // Mettre à jour l'interface après déconnexion
         }
     });
 
@@ -41,12 +43,17 @@ document.addEventListener("DOMContentLoaded", function() {
         // Récupérer les informations de connexion
         const email = loginForm['input-email'].value;
         const password = loginForm['input-password'].value;
+
+        console.log("Tentative de connexion avec : ", email);
+        
         // Connexion de l'utilisateur
         auth.signInWithEmailAndPassword(email, password).then((cred) => {
             // Réinitialiser le formulaire de connexion après connexion réussie
+            console.log("Connexion réussie avec : ", cred.user.email);
             loginForm.reset();
             document.getElementById("error-message").innerText = '';  // Réinitialiser le message d'erreur
         }).catch((error) => {
+            console.error("Erreur lors de la connexion : ", error.message);
             document.getElementById("error-message").innerText = error.message;  // Afficher le message d'erreur
         });
     });
@@ -55,6 +62,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const logout = document.querySelector('#logout-link');
     logout.addEventListener('click', (e) => {
         e.preventDefault();
-        auth.signOut();  // Déconnexion de l'utilisateur
+        auth.signOut().then(() => {
+            console.log("Déconnexion réussie.");
+        }).catch((error) => {
+            console.error("Erreur lors de la déconnexion : ", error.message);
+        });
     });
 });
