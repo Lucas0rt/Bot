@@ -25,8 +25,7 @@
             // Initialize firebase
             firebase.initializeApp(firebaseConfig);
 
-            // Make auth and database references
-            const auth = firebase.auth();
+            // Make database reference
             const db = firebase.database();
         </script>
 
@@ -174,7 +173,7 @@
                         // Ajouter la carte au conteneur
                         robotGrid.appendChild(robotCard);
 
-                        // Optionnel: Ajouter un événement de clic sur la carte
+                        // Ajouter un événement de clic sur la carte
                         robotCard.addEventListener('click', function() {
                             alert(`Connecté à ${robotData.name} avec l'IP ${robotData.ip}`);
                             // Afficher le panneau de contrôle après la sélection du robot
@@ -186,10 +185,6 @@
                     robotGrid.style.display = 'grid';
                 });
             }
-
-            document.addEventListener("DOMContentLoaded", function() {
-                loadRobots();
-            });
 
             // Fonction pour envoyer des commandes au robot
             function sendCommand(command) {
