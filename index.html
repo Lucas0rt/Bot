@@ -1,53 +1,110 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Robot Control</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
-    }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Robot Control Login</title>
 
-    h1 {
-      color: #333;
-    }
+        <!-- include Firebase SDK -->
+        <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
 
-    .button {
-      padding: 15px 30px;
-      font-size: 18px;
-      margin: 10px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+        <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
+        
+        <script>
+            // Firebase config
+            const firebaseConfig = {
+                apiKey: "AIzaSyA2vJAKkmXJggEJTwMnEOdwwSeK6PnOnn8",
+                authDomain: "solarbot-1d299.firebaseapp.com",
+                projectId: "solarbot-1d299",
+                storageBucket: "solarbot-1d299.appspot.com",
+                messagingSenderId: "752851957745",
+                appId: "1:752851957745:web:bfce159f8cf19b8b867650"
+            };
 
-    .button.forward { background-color: #4CAF50; color: white; }
-    .button.backward { background-color: #f44336; color: white; }
-    .button.left { background-color: #2196F3; color: white; }
-    .button.right { background-color: #FF9800; color: white; }
+            // Initialize firebase
+            firebase.initializeApp(firebaseConfig);
 
-    .button:hover {
-      opacity: 0.8;
-    }
-  </style>
-</head>
-<body>
-  <h1>Contrôle du Robot</h1>
+            // Make auth and database references
+            const auth = firebase.auth();
+            const db = firebase.database();
 
-  <button class="button forward" onclick="sendCommand('forward')">Avancer</button><br>
-  <button class="button backward" onclick="sendCommand('backward')">Reculer</button><br>
-  <button class="button left" onclick="sendCommand('left')">Tourner à gauche</button>
-  <button class="button right" onclick="sendCommand('right')">Tourner à droite</button>
+            
+        </script>
 
-  <script>
-    function sendCommand(command) {
-      // Placeholder for command sending logic
-      alert('Commande envoyée : ' + command);
-      // Dans l'étape suivante, nous remplacerons ce alert par un fetch HTTP
-    }
-  </script>
-</body>
+        <style>
+            body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            }
+
+            h1 {
+            color: #333;
+            }
+
+            .button {
+            padding: 15px 30px;
+            font-size: 18px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            }
+
+            .button.forward { background-color: #4CAF50; color: white; }
+            .button.backward { background-color: #f44336; color: white; }
+            .button.left { background-color: #2196F3; color: white; }
+            .button.right { background-color: #FF9800; color: white; }
+
+            .button:hover {
+            opacity: 0.8;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="topnav">
+            <h1>Robot Control</h1>
+        </div>
+
+        <!--AUTHENTICATION BAR (USER DETAILS/LOGOUT BUTTON)-->
+        <div id="authentication-bar" style="display: none;">
+            <p><span id="authentication-status">User logged in:</span>
+            <span id="user-details">USEREMAIL</span>
+            <a href="/" id="logout-link">(logout)</a>
+            </p>
+        </div>
+
+        <!--LOGIN FORM-->
+        <form id="login-form" style="display: none;">
+            <div class="form-elements-container">
+            <label for="input-email"><b>Email</b></label>
+            <input type="text" placeholder="Enter Username" id="input-email" required>
+    
+            <label for="input-password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id="input-password" required>
+    
+            <button type="submit" id="login-button">Login</button>
+            <p id="error-message" style="color:red;"></p>
+            </div>
+        </form>
+
+        <button class="button forward" onclick="sendCommand('forward')">Avancer</button><br>
+        <button class="button backward" onclick="sendCommand('backward')">Reculer</button><br>
+        <button class="button left" onclick="sendCommand('left')">Tourner à gauche</button>
+        <button class="button right" onclick="sendCommand('right')">Tourner à droite</button>
+
+        <script>
+            function sendCommand(command) {
+            // Placeholder for command sending logic
+            alert('Commande envoyée : ' + command);
+            // Dans l'étape suivante, nous remplacerons ce alert par un fetch HTTP
+            }
+        </script>
+
+        <!--INCLUDE JS FILES-->
+            <script src="scripts/auth.js"></script>
+
+    </body>
 </html>
