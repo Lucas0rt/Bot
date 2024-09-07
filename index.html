@@ -15,7 +15,7 @@
             const firebaseConfig = {
                 apiKey: "AIzaSyA2vJAKkmXJggEJTwMnEOdwwSeK6PnOnn8",
                 authDomain: "solarbot-1d299.firebaseapp.com",
-                databaseURL: "https://solarbot-1d299-default-rtdb.europe-west1.firebasedatabase.app/",
+                databaseURL: "https://solarbot-1d299-default-rtdb.europe-west1.firebasedatabase.app",
                 projectId: "solarbot-1d299",
                 storageBucket: "solarbot-1d299.appspot.com",
                 messagingSenderId: "752851957745",
@@ -24,6 +24,9 @@
 
             // Initialize firebase
             firebase.initializeApp(firebaseConfig);
+
+            // Initialize Firebase authentication
+            const auth = firebase.auth();  
 
             // Make database reference
             const db = firebase.database();

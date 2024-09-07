@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Initialize Firebase authentication
-    const auth = firebase.auth();  // Ensure the `auth` object is defined here
 
     function setupUI(user) {
         const loginForm = document.getElementById('login-form');
