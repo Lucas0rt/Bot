@@ -108,13 +108,14 @@
 
             /* Panneau de contrôle centré sous la carte sélectionnée */
             #control-panel-container {
-                display: none; /* CACHER PAR DÉFAUT */
+                display: none; /* Cacher par défaut */
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 gap: 20px; /* Espacement entre la carte et le panneau de contrôle */
-                margin-top: 30px; /* Adjust if needed for distance between card and panel */
+                margin-top: 0; /* Remove margin-top for better alignment */
+                padding-top: 20px; /* Adding padding to prevent the panel from sticking too close to the card */
             }
 
             /* Le panneau de contrôle sera affiché sous la carte sélectionnée */
