@@ -90,7 +90,7 @@
 
             .button {
                 padding: 15px 40px;
-                font-size: 100px;
+                font-size: 150px;
                 margin: 10px;
                 border: none; /* Supprimer la bordure */
                 background: none; /* Supprimer le fond par défaut */
@@ -98,18 +98,24 @@
                 color: white; /* Couleur de l'icône */
             }
 
-            .button.forward, .button.backward {
+            .button.forward {
                 color: #03ac1f;
+                margin-bottom: 50px; /* Réduire l'espace en bas de la flèche du haut */
+            }
+
+            .button.backward {
+                color: #03ac1f;
+                margin-top: 50px; /* Réduire l'espace en haut de la flèche du bas */
             }
 
             .button.left {
                 color: #03ac1f;
-                margin-right: 100px;
+                margin-right: 50px;
             }
 
             .button.right {
                 color: #03ac1f;
-                margin-left: 100px;
+                margin-left: 50px;
             }
 
             .button:hover {
