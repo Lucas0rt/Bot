@@ -142,7 +142,7 @@
         <div id="selected-robot-card" style="display: none; margin: 0 auto; width: 150px;">
             <!-- La carte du robot sera insérée ici -->
         </div>
-        
+
         <!--Panneau de contrôle des robots (boutons de commande)-->
         <div id="control-panel" style="display: none;">
             <button class="button forward" onclick="sendCommand('forward')">Avancer</button><br>
@@ -162,7 +162,10 @@
                 
                 // Cacher le bouton de retour
                 backButton.style.display = 'none';
-                
+
+                // Cacher la carte du robot sélectionné
+                document.getElementById('selected-robot-card').style.display = 'none';
+
                 // Afficher la grille des robots
                 document.getElementById('robot-grid').style.display = 'grid';
             }); 
