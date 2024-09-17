@@ -59,7 +59,7 @@
 
             /* Style pour chaque carte de robot */
             .robot-card {
-                background-color: #95f59d;
+                background-color: #e4e4e4;
                 border: 2px solid #000000;
                 border-radius: 10px;
                 padding: 20px;
@@ -89,24 +89,80 @@
             }
 
             .button {
-                padding: 15px 40px;
+                padding: 15px;
                 font-size: 50px;
                 margin: 10px;
                 border: none; /* Supprimer la bordure */
-                background: none; /* Supprimer le fond par défaut */
+                background-color: #03ac1f; /* Couleur de fond du bouton */
+                border-radius: 5px; /* Coins arrondis */
                 cursor: pointer;
                 color: white; /* Couleur de l'icône */
-            }
-
-            .button.forward, .button.backward, .button.left, .button.right {
-                color: #03ac1f;
+                box-shadow: 0px 2px 4px rgba(0,0,0,0.2); /* Ombre légère */
+                transition: transform 0.3s ease, opacity 0.3s ease; /* Transition fluide */
             }
 
             .button:hover {
                 opacity: 0.8;
                 transform: scale(1.10);
             }
-        </style>
+
+            /* Panneau de contrôle centré sous la carte sélectionnée */
+            #control-panel-container {
+                display: none; /* Cacher par défaut */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 20px; /* Espace entre la carte et le panneau de contrôle */
+            }
+
+            #control-panel {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin-top: 20px;
+            }
+
+            /* Bouton de retour */
+            #back-button {
+            display: none; /* Cacher par défaut */
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #03ac1f; /* Couleur de fond */
+            color: white; /* Couleur du texte */
+            border: none; /* Supprimer la bordure */
+            border-radius: 5px; /* Coins arrondis */
+            cursor: pointer;
+            box-shadow: 0px 2px 4px rgba(0,0,0,0.2); /* Ombre légère */
+            transition: opacity 0.3s ease;
+            }
+
+            #back-button:hover {
+            opacity: 0.8; /* Effet de hover */
+            }
+
+            /* Carte du robot sélectionné */
+            #selected-robot-card { 
+                display: none;
+                width: 150px;
+                position: absolute; /* Position absolue pour le centrage */
+                top: 50%; /* Position verticale au milieu */
+                left: 50%; /* Position horizontale au milieu */
+                transform: translate(-50%, -50%); /* Compense le positionnement */
+                background-color: #e4e4e4;
+                border: 2px solid #000000;
+                border-radius: 10px;
+                padding: 15px;
+                box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            </style>
     </head>
 
     <body>
@@ -144,25 +200,27 @@
             <!-- Les cartes des robots seront insérées ici -->
         </div>
 
-        <!-- Carte du robot sélectionné (affichée après sélection) -->
-        <div id="selected-robot-card" style="display: none; margin: 0 auto; width: 150px;">
-            <!-- La carte du robot sera insérée ici -->
-        </div>
+        <!-- Conteneur de la carte sélectionnée et du panneau de contrôle -->
+        <div id="control-panel-container">
+            <div id="selected-robot-card">
+                <!-- La carte du robot sera insérée ici -->
+            </div>
 
-        <!-- Panneau de contrôle des robots (icônes Font Awesome) -->
-        <div id="control-panel" style="display: none;">
-            <button class="button forward" onclick="sendCommand('forward')">
-                <i class="fa-solid fa-circle-chevron-up"></i>
-            </button><br>
-            <button class="button left" onclick="sendCommand('left')">
-                <i class="fa-solid fa-circle-chevron-left"></i>
-            </button>
-            <button class="button right" onclick="sendCommand('right')">
-                <i class="fa-solid fa-circle-chevron-right"></i>
-            </button><br>
-            <button class="button backward" onclick="sendCommand('backward')">
-                <i class="fa-solid fa-circle-chevron-down"></i>
-            </button><br>
+            <!-- Panneau de contrôle des robots (icônes Font Awesome) -->
+            <div id="control-panel">
+                <button class="button forward" onclick="sendCommand('forward')">
+                    <i class="fa-solid fa-circle-chevron-up"></i>
+                </button><br>
+                <button class="button left" onclick="sendCommand('left')">
+                    <i class="fa-solid fa-circle-chevron-left"></i>
+                </button>
+                <button class="button right" onclick="sendCommand('right')">
+                    <i class="fa-solid fa-circle-chevron-right"></i>
+                </button><br>
+                <button class="button backward" onclick="sendCommand('backward')">
+                    <i class="fa-solid fa-circle-chevron-down"></i>
+                </button><br>
+            </div>
         </div>
 
         <script>
@@ -172,13 +230,10 @@
             // Ajouter un événement de clic sur le bouton de retour
             backButton.addEventListener('click', function() {
                 // Cacher le panneau de contrôle
-                document.getElementById('control-panel').style.display = 'none';
+                document.getElementById('control-panel-container').style.display = 'none';
                 
                 // Cacher le bouton de retour
                 backButton.style.display = 'none';
-
-                // Cacher la carte du robot sélectionné
-                document.getElementById('selected-robot-card').style.display = 'none';
 
                 // Afficher la grille des robots
                 document.getElementById('robot-grid').style.display = 'grid';
@@ -222,7 +277,7 @@
                             // Cacher la grille des robots
                             document.getElementById('robot-grid').style.display = 'none';
                             // Afficher le panneau de contrôle après la sélection du robot
-                            document.getElementById('control-panel').style.display = 'block';
+                            document.getElementById('control-panel-container').style.display = 'flex';
                             // Afficher le bouton de retour
                             backButton.style.display = 'block';
                             // Insérer la carte du robot sélectionné dans le nouveau div
@@ -232,9 +287,6 @@
                             // Créer un clone de la carte du robot sélectionné pour l'afficher
                             const clonedRobotCard = robotCard.cloneNode(true);
                             selectedRobotCard.appendChild(clonedRobotCard);
-
-                            // Afficher la carte du robot sélectionné
-                            selectedRobotCard.style.display = 'block';
                         });
                     }
 
