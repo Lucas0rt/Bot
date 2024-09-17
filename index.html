@@ -47,7 +47,7 @@
             .robot-grid {
                 display: none; /* Cacher la grille par défaut */
                 grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
-                gap: 20px; /* Espace entre les cartes */
+                gap: 10px; /* Espace entre les cartes */
                 padding: 20px;
                 justify-items: center;
             }
@@ -130,6 +130,9 @@
             </div>
         </form>
 
+        <!-- Bouton de retour (par défaut caché) -->
+        <button id="back-button" style="display: none; position: absolute; top: 20px; left: 20px; padding: 10px 20px;">Retour</button>
+
         <!-- Liste des robots (affichée après connexion) -->
         <div id="robot-grid" class="robot-grid">
             <!-- Les cartes des robots seront insérées ici -->
@@ -144,6 +147,21 @@
         </div>
 
         <script>
+            // Récupérer la référence du bouton de retour
+            const backButton = document.getElementById('back-button');
+
+            // Ajouter un événement de clic sur le bouton de retour
+            backButton.addEventListener('click', function() {
+                // Cacher le panneau de contrôle
+                document.getElementById('control-panel').style.display = 'none';
+                
+                // Cacher le bouton de retour
+                backButton.style.display = 'none';
+                
+                // Afficher la grille des robots
+                document.getElementById('robot-grid').style.display = 'grid';
+            }); 
+
             // Fonction pour récupérer la liste des robots depuis Firebase et générer des cartes
             function loadRobots() {
                 const robotsRef = db.ref("robots");
@@ -179,8 +197,12 @@
                         // Ajouter un événement de clic sur la carte
                         robotCard.addEventListener('click', function() {
                             alert(`Connecté à ${robotData.name} avec l'IP ${robotData.ip}`);
+                            // Cacher la grille des robots
+                            document.getElementById('robot-grid').style.display = 'none';
                             // Afficher le panneau de contrôle après la sélection du robot
                             document.getElementById('control-panel').style.display = 'block';
+                            // Afficher le bouton de retour
+                            backButton.style.display = 'block';
                         });
                     }
 
