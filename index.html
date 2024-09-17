@@ -96,7 +96,7 @@
                 background-color: #03ac1f; /* Couleur de fond du bouton */
                 border-radius: 5px; /* Coins arrondis */
                 cursor: pointer;
-                color: white; /* Couleur de l'icône */
+                color: #0e681d; /* Couleur de l'icône */
                 box-shadow: 0px 2px 4px rgba(0,0,0,0.2); /* Ombre légère */
                 transition: transform 0.3s ease, opacity 0.3s ease; /* Transition fluide */
             }
@@ -108,40 +108,44 @@
 
             /* Panneau de contrôle centré sous la carte sélectionnée */
             #control-panel-container {
-                display: none; /* Cacher par défaut */
+                display: none; /* CACHER PAR DÉFAUT */
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                gap: 20px; /* Espace entre la carte et le panneau de contrôle */
+                gap: 20px; /* Espacement entre la carte et le panneau de contrôle */
+                position: absolute; /* Position absolue par rapport au body */
+                top: 50%; /* AU MILIEU DE L'ÉCRAN */
+                left: 50%;
+                transform: translate(-50%, -50%); /* Centrer horizontalement et verticalement */
             }
 
+            /* Le panneau de contrôle sera affiché sous la carte sélectionnée */
             #control-panel {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                margin-top: 20px;
             }
 
             /* Bouton de retour */
             #back-button {
-            display: none; /* Cacher par défaut */
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            padding: 10px 20px;
-            background-color: #03ac1f; /* Couleur de fond */
-            color: white; /* Couleur du texte */
-            border: none; /* Supprimer la bordure */
-            border-radius: 5px; /* Coins arrondis */
-            cursor: pointer;
-            box-shadow: 0px 2px 4px rgba(0,0,0,0.2); /* Ombre légère */
-            transition: opacity 0.3s ease;
+                display: none; /* Cacher par défaut */
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                padding: 10px 20px;
+                background-color: #03ac1f; /* Couleur de fond */
+                color: white; /* Couleur du texte */
+                border: none; /* Supprimer la bordure */
+                border-radius: 5px; /* Coins arrondis */
+                cursor: pointer;
+                box-shadow: 0px 2px 4px rgba(0,0,0,0.2); /* Ombre légère */
+                transition: opacity 0.3s ease;
             }
 
             #back-button:hover {
-            opacity: 0.8; /* Effet de hover */
+                opacity: 0.8; /* Effet de hover */
             }
 
             /* Carte du robot sélectionné */
