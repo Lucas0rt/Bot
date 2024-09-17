@@ -59,7 +59,7 @@
 
             /* Style pour chaque carte de robot */
             .robot-card {
-                background-color: #95f59d;
+                background-color: #dddddd;
                 border: 2px solid #000000;
                 border-radius: 10px;
                 padding: 20px;
@@ -90,7 +90,7 @@
 
             .button {
                 padding: 15px 40px;
-                font-size: 50px;
+                font-size: 100px;
                 margin: 10px;
                 border: none; /* Supprimer la bordure */
                 background: none; /* Supprimer le fond par défaut */
@@ -98,14 +98,45 @@
                 color: white; /* Couleur de l'icône */
             }
 
-            .button.forward, .button.backward, .button.left, .button.right {
+            .button.forward, .button.backward {
                 color: #03ac1f;
+            }
+
+            .button.left, .button.right {
+                color: #03ac1f;
+                margin-right: 100px;
+            }
+
+            .button.right {
+                color: #03ac1f;
+                margin-left: 100px;
             }
 
             .button:hover {
                 opacity: 0.8;
                 transform: scale(1.10);
             }
+
+            /* Bouton de retour */
+            #back-button {
+                display: none; /* Cacher par défaut */
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                padding: 10px 20px;
+                background-color: #03ac1f; /* Couleur de fond */
+                color: white; /* Couleur du texte */
+                border: none; /* Supprimer la bordure */
+                border-radius: 5px; /* Coins arrondis */
+                cursor: pointer;
+                box-shadow: 0px 2px 4px rgba(0,0,0,0.2); /* Ombre légère */
+                transition: opacity 0.3s ease;
+            }
+
+            #back-button:hover {
+                opacity: 0.8; /* Effet de hover */
+            }
+
         </style>
     </head>
 
