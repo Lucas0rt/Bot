@@ -46,16 +46,18 @@
             /* Grille avec 2 colonnes par ligne */
             .robot-grid {
                 display: none; /* Cacher la grille par défaut */
-                grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
+                grid-template-columns: repeat(2, 1fr); /* 2 colonnes et carte qui se centre au milieu de colonne */
                 gap: 10px; /* Espace entre les cartes */
-                padding: 20px;
+                padding: 20px; /* Espace avec bords de l'ecran */
                 justify-items: center;
+                margin: 0 auto; /* Centrer la grille sur la page */
+                max-width: 500px; /* Limiter la largeur de la grille pour ne pas étendre sur toute la page */
             }
 
             /* Style pour chaque carte de robot */
             .robot-card {
-                background-color: #f4f4f4;
-                border: 2px solid #ccc;
+                background-color: #95f59d;
+                border: 2px solid #000000;
                 border-radius: 10px;
                 padding: 20px;
                 width: 150px;
@@ -65,11 +67,11 @@
                 justify-content: center;
                 align-items: center;
                 box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-                transition: transform 0.3s ease;
+                transition: transform 0.5s ease;
             }
 
             .robot-card:hover {
-                transform: scale(1.05);
+                transform: scale(1.10);
             }
 
             .robot-name {
@@ -84,7 +86,7 @@
             }
 
             .button {
-                padding: 15px 30px;
+                padding: 15px 20px;
                 font-size: 18px;
                 margin: 10px;
                 border: none;
@@ -92,10 +94,10 @@
                 cursor: pointer;
             }
 
-            .button.forward { background-color: #03ac1f; color: white; }
-            .button.backward { background-color: #03ac1f; color: white; }
-            .button.left { background-color: #03ac1f; color: white; }
-            .button.right { background-color: #03ac1f; color: white; }
+            .button.forward, .button.backward, .button.left, .button.right {
+                background-color: #03ac1f;
+                color: white;
+            }
 
             .button:hover {
                 opacity: 0.8;
@@ -143,12 +145,12 @@
             <!-- La carte du robot sera insérée ici -->
         </div>
 
-        <!--Panneau de contrôle des robots (boutons de commande)-->
+        <!-- Panneau de contrôle des robots (flèches de commande) -->
         <div id="control-panel" style="display: none;">
-            <button class="button forward" onclick="sendCommand('forward')">Avancer</button><br>
-            <button class="button left" onclick="sendCommand('left')">Tourner à gauche</button>
-            <button class="button right" onclick="sendCommand('right')">Tourner à droite</button>
-            <button class="button backward" onclick="sendCommand('backward')">Reculer</button><br>
+            <button class="button forward" onclick="sendCommand('forward')">↑</button><br>
+            <button class="button left" onclick="sendCommand('left')">←</button>
+            <button class="button right" onclick="sendCommand('right')">→</button><br>
+            <button class="button backward" onclick="sendCommand('backward')">↓</button><br>
         </div>
 
         <script>
