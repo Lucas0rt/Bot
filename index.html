@@ -114,10 +114,7 @@
                 justify-content: center;
                 align-items: center;
                 gap: 20px; /* Espacement entre la carte et le panneau de contrôle */
-                position: absolute; /* Position absolue par rapport au body */
-                top: 50%; /* AU MILIEU DE L'ÉCRAN */
-                left: 50%;
-                transform: translate(-50%, -50%); /* Centrer horizontalement et verticalement */
+                margin-top: 30px; /* Adjust if needed for distance between card and panel */
             }
 
             /* Le panneau de contrôle sera affiché sous la carte sélectionnée */
@@ -150,18 +147,13 @@
 
             /* Carte du robot sélectionné */
             #selected-robot-card { 
-                display: none;
+                display: flex;
                 width: 150px;
-                position: absolute; /* Position absolue pour le centrage */
-                top: 50%; /* Position verticale au milieu */
-                left: 50%; /* Position horizontale au milieu */
-                transform: translate(-50%, -50%); /* Compense le positionnement */
                 background-color: #e4e4e4;
                 border: 2px solid #000000;
                 border-radius: 10px;
                 padding: 15px;
                 box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-                display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
