@@ -207,7 +207,7 @@
                         // Ajouter l'adresse IP du robot
                         const robotIP = document.createElement('div');
                         robotIP.classList.add('robot-ip');
-                        robotIP.innerText = IP: ${robotData.ip};
+                        robotIP.innerText = `IP: ${robotData.ip}`;
 
                         // Ajouter les éléments à la carte
                         robotCard.appendChild(robotName);
@@ -218,7 +218,7 @@
 
                         // Ajouter un événement de clic sur la carte
                         robotCard.addEventListener('click', function() {
-                            alert(Connecté à ${robotData.name} avec l'IP ${robotData.ip});
+                            alert(`Connecté à ${robotData.name} avec l'IP ${robotData.ip}`);
                             // Cacher la grille des robots
                             document.getElementById('robot-grid').style.display = 'none';
                             // Afficher le panneau de contrôle après la sélection du robot
