@@ -89,6 +89,19 @@
                 color: #555;
             }
 
+            #selected-robot-card {
+                display: flex;
+                justify-content: center; /* Centre horizontalement */
+                align-items: center;     /* Centre verticalement */
+                margin-top: 20px;
+                width: 150px;            
+                height: 150pxh;         
+                position: absolute;      /* Position absolue */
+                top: 0;
+                left: 0;
+                background-color: rgba(0, 0, 0, 0.2); /* Optionnel : Fond semi-transparent */
+            }
+
             .button {
                 padding: 0px;
                 font-size: 120px;
@@ -106,7 +119,7 @@
 
             .button.backward {
                 color: #03ac1f;
-                margin-top: -40px; /* Réduire l'espace en haut de la flèche du bas */
+                margin-top: -30px; /* Réduire l'espace en haut de la flèche du bas */
             }
 
             .button.left {
