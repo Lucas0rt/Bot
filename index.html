@@ -89,24 +89,6 @@
                 color: #555;
             }
 
-            /* Style pour la carte sélectionnée (centrée) */
-            #selected-robot-card {
-                display: none;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                background-color: #dddddd;
-                border: 2px solid #000000;
-                border-radius: 10px;
-                padding: 0px;
-                width: 150px;
-                height: 150px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
-
             .button {
                 padding: 0px;
                 font-size: 120px;
@@ -163,6 +145,39 @@
                 opacity: 0.8; /* Effet de hover */
             }
 
+            /* Panneau de contrôle centré sous la carte sélectionnée */
+            #control-panel-container {
+                display: none; /* CACHER PAR DÉFAUT */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 20px; /* Espacement entre la carte et le panneau de contrôle */
+                margin-top: 30px; /* Adjust if needed for distance between card and panel */
+            }
+
+            /* Le panneau de contrôle sera affiché sous la carte sélectionnée */
+            #control-panel {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            /* Carte du robot sélectionné */
+            #selected-robot-card { 
+                display: flex;
+                width: 150px;
+                background-color: #e4e4e4;
+                border: 2px solid #000000;
+                border-radius: 10px;
+                padding: 15px;
+                box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
         </style>
     </head>
      
@@ -202,8 +217,9 @@
             <!-- Les cartes des robots seront insérées ici -->
         </div>
 
-        <!-- Carte du robot sélectionné (affichée après sélection) -->
-        <div id="selected-robot-card" style="display: none">
+       <!-- Conteneur de la carte sélectionnée et du panneau de contrôle -->
+       <div id="control-panel-container">
+        <div id="selected-robot-card">
             <!-- La carte du robot sera insérée ici -->
         </div>
 
@@ -280,7 +296,8 @@
 
                             // Cacher la grille des robots
                             document.getElementById('robot-grid').style.display = 'none';
-
+                            // Afficher le panneau de contrôle après la sélection du robot
+                            document.getElementById('control-panel-container').style.display = 'flex';
                             // Afficher le bouton de retour
                             backButton.style.display = 'block';
                             // Insérer la carte du robot sélectionné dans le nouveau div
@@ -290,12 +307,6 @@
                             // Créer un clone de la carte du robot sélectionné pour l'afficher
                             const clonedRobotCard = robotCard.cloneNode(true);
                             selectedRobotCard.appendChild(clonedRobotCard);
-
-                            // Afficher la carte du robot sélectionné
-                            selectedRobotCard.style.display = 'block';
-
-                            // Afficher le panneau de contrôle après la sélection du robot
-                            document.getElementById('control-panel').style.display = 'block';
                         });
                     }
 
