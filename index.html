@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
+    <head> <!--================================================================================================================-->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Robot Control Login</title>
@@ -13,7 +13,7 @@
         <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
 
-        <script>
+        <script> /* ========================================================*/
             // Firebase config
             const firebaseConfig = {
                 apiKey: "AIzaSyA2vJAKkmXJggEJTwMnEOdwwSeK6PnOnn8",
@@ -35,7 +35,7 @@
             const db = firebase.database();
         </script>
 
-        <style>
+        <style> /* ========================================================*/
             body {
                 font-family: Arial, sans-serif;
                 text-align: center;
@@ -89,11 +89,16 @@
                 color: #555;
             }
 
+            /* Style pour la carte sélectionnée (centrée) */
             #selected-robot-card {
+                display: none;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
                 background-color: #dddddd;
                 border: 2px solid #000000;
                 border-radius: 10px;
-                margin-top: 20px;
                 padding: 20px;
                 width: 150px;
                 height: 150px;
@@ -101,8 +106,7 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-                transition: transform 0.5s ease;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             }
 
             .button {
@@ -163,8 +167,9 @@
 
         </style>
     </head>
-
-    <body>
+     
+    
+    <body> <!--================================================================================================================-->
         <div class="topnav">
             <h1>Robot Control</h1>
         </div>
@@ -274,6 +279,7 @@
                         // Ajouter un événement de clic sur la carte
                         robotCard.addEventListener('click', function() {
                             alert(`Connecté à ${robotData.name} avec l'IP ${robotData.ip}`);
+
                             // Cacher la grille des robots
                             document.getElementById('robot-grid').style.display = 'none';
 
@@ -284,31 +290,27 @@
                             const selectedrobotCard = document.getElementById('selected-robot-card');
                             selectedRobotCard.innerHTML = '';
 
-                            // Créer une nouvelle carte pour le robot sélectionné
-                            selectedrobotCard = document.createElement('div');
-                            selectedrobotCard.classList.add('selected-robot-card');
-
                             // Ajouter le nom du robot
                             const selectedrobotName = document.createElement('div');
                             selectedrobotName.classList.add('robot-name');
                             selectedrobotName.innerText = robotData.name;
 
-                            // Ajouter l'adresse IP du robot
+                            // Add the robot IP
                             const selectedrobotIP = document.createElement('div');
                             selectedrobotIP.classList.add('robot-ip');
                             selectedrobotIP.innerText = `IP: ${robotData.ip}`;
 
-                            // Ajouter les éléments à la carte
+                            // Add elements to the selected robot card
                             selectedrobotCard.appendChild(selectedrobotName);
                             selectedrobotCard.appendChild(selectedrobotIP);
 
-                            // Ajouter la carte dans le conteneur existant
+                            // Append the selected robot card to the selectedRobotCard container
                             selectedRobotCard.appendChild(selectedrobotCard);
 
-                            // Afficher la carte du robot sélectionné
+                            // Display the selected robot card
                             selectedRobotCard.style.display = 'block';
 
-                            // Afficher le panneau de contrôle après la sélection du robot
+                            // Display the control panel after selecting the robot
                             document.getElementById('control-panel').style.display = 'block';
                         });
                     }
