@@ -90,16 +90,20 @@
             }
 
             #selected-robot-card {
+                display: flex;
+                justify-content: center; /* Centre horizontalement */
+                align-items: center;     /* Centre verticalement */
+                position: absolute;      /* Position absolue pour se centrer sur l'écran */
+                top: 50%;                /* Centre verticalement */
+                left: 50%;               /* Centre horizontalement */
+                transform: translate(-50%, -50%); /* Assure un vrai centrage */
+                width: 150px;
+                height: 150px;
                 background-color: #dddddd;
                 border: 2px solid #000000;
                 border-radius: 10px;
-                margin-top: 20px;
-                width: 150px;
-                height: 150px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
+                z-index: 10;             /* S'assure que la carte soit devant */
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             }
 
             .button {
@@ -113,7 +117,7 @@
 
             .button.forward {
                 color: #03ac1f;
-                margin-bottom: -40px; /* Réduire l'espace en bas de la flèche du haut */
+                margin-bottom: -50px; /* Réduire l'espace en bas de la flèche du haut */
                 margin-top: 30px;
             }
 
@@ -124,12 +128,12 @@
 
             .button.left {
                 color: #03ac1f;
-                margin-right: 40px;
+                margin-right: 45px;
             }
 
             .button.right {
                 color: #03ac1f;
-                margin-left: 40px;
+                margin-left: 45px;
             }
 
             .button:hover {
@@ -283,6 +287,7 @@
 
                             // Créer un clone de la carte du robot sélectionné pour l'afficher
                             const clonedRobotCard = robotCard.cloneNode(true);
+                            clonedRobotCard.style.margin = "0";
                             selectedRobotCard.appendChild(clonedRobotCard);
 
                             // Afficher la carte du robot sélectionné
