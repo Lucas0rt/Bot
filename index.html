@@ -279,26 +279,23 @@
                         // Ajouter un événement de clic sur la carte
                         robotCard.addEventListener('click', function() {
                             alert(`Connecté à ${robotData.name} avec l'IP ${robotData.ip}`);
-
+                            
                             // Cacher la grille des robots
                             document.getElementById('robot-grid').style.display = 'none';
-
+                            // Afficher le panneau de contrôle après la sélection du robot
+                            document.getElementById('control-panel').style.display = 'block';
                             // Afficher le bouton de retour
                             backButton.style.display = 'block';
-
-                            // Creer la carte du robot sélectionné dans le nouveau div                   
-                            const selectedrobotCard = document.getElementById('selected-robot-card');
-                            selectedRobotCard.innerHTML = '';
+                            // Insérer la carte du robot sélectionné dans le nouveau div
+                            const selectedRobotCard = document.getElementById('selected-robot-card');
+                            selectedRobotCard.innerHTML = ''; // Vider pour éviter les doublons
 
                             // Créer un clone de la carte du robot sélectionné pour l'afficher
                             const clonedRobotCard = robotCard.cloneNode(true);
                             selectedRobotCard.appendChild(clonedRobotCard);
 
-                            // Display the selected robot card
+                            // Afficher la carte du robot sélectionné
                             selectedRobotCard.style.display = 'block';
-
-                            // Display the control panel after selecting the robot
-                            document.getElementById('control-panel').style.display = 'block';
                         });
                     }
 
