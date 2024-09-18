@@ -90,13 +90,12 @@
             }
 
             #selected-robot-card {
-                display: flex;
+                display: absolute;
                 justify-content: center; /* Centre horizontalement */
                 align-items: center;     /* Centre verticalement */
                 position: absolute;      /* Position absolue pour se centrer sur l'écran */
                 top: 50%;                /* Centre verticalement */
                 left: 50%;               /* Centre horizontalement */
-                transform: translate(-50%, -50%); /* Assure un vrai centrage */
                 width: 150px;
                 height: 150px;
                 background-color: #dddddd;
@@ -145,8 +144,8 @@
             #back-button {
                 display: none; /* Cacher par défaut */
                 position: absolute;
-                top: 50px;
-                left: 50px;
+                top: 30px;
+                left: 30px;
                 padding: 10px 20px;
                 font-size: 14px;
                 background-color: #03ac1f; /* Couleur de fond */
