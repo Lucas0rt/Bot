@@ -100,8 +100,6 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-                transition: transform 0.5s ease;
             }
 
             .button {
@@ -143,8 +141,8 @@
             #back-button {
                 display: none; /* Cacher par défaut */
                 position: absolute;
-                top: 30px;
-                left: 30px;
+                top: 50px;
+                left: 50px;
                 padding: 10px 20px;
                 font-size: 14px;
                 background-color: #03ac1f; /* Couleur de fond */
@@ -191,7 +189,7 @@
         </form>
 
         <!-- Bouton de retour (par défaut caché) -->
-        <button id="back-button" style="display: none; position: absolute; top: 20px; left: 20px; padding: 10px 20px;">Retour</button>
+        <button id="back-button" style="display: none; position: absolute">Retour</button>
 
         <!-- Liste des robots (affichée après connexion) -->
         <div id="robot-grid" class="robot-grid">
@@ -199,7 +197,7 @@
         </div>
 
         <!-- Carte du robot sélectionné (affichée après sélection) -->
-        <div id="selected-robot-card" style="display: none; margin: 0 auto; width: 150px;">
+        <div id="selected-robot-card" style="display: none">
             <!-- La carte du robot sera insérée ici -->
         </div>
 
