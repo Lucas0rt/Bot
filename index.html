@@ -89,7 +89,7 @@
                 color: #555;
             }
 
-            .selected-robot-card {
+            #selected-robot-card {
                 background-color: #dddddd;
                 border: 2px solid #000000;
                 border-radius: 10px;
@@ -281,8 +281,12 @@
                             backButton.style.display = 'block';
 
                             // Creer la carte du robot sélectionné dans le nouveau div                   
-                            const selectedrobotCard = document.createElement('div');
-                            robotCard.classList.add('selected-robot-card');
+                            const selectedrobotCard = document.getElementById('selected-robot-card');
+                            selectedRobotCard.innerHTML = '';
+
+                            // Créer une nouvelle carte pour le robot sélectionné
+                            selectedrobotCard = document.createElement('div');
+                            selectedrobotCard.classList.add('selected-robot-card');
 
                             // Ajouter le nom du robot
                             const selectedrobotName = document.createElement('div');
@@ -297,6 +301,9 @@
                             // Ajouter les éléments à la carte
                             selectedrobotCard.appendChild(selectedrobotName);
                             selectedrobotCard.appendChild(selectedrobotIP);
+
+                            // Ajouter la carte dans le conteneur existant
+                            selectedRobotCard.appendChild(selectedrobotCard);
 
                             // Afficher la carte du robot sélectionné
                             selectedRobotCard.style.display = 'block';
