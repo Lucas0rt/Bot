@@ -290,22 +290,9 @@
                             const selectedrobotCard = document.getElementById('selected-robot-card');
                             selectedRobotCard.innerHTML = '';
 
-                            // Ajouter le nom du robot
-                            const selectedrobotName = document.createElement('div');
-                            selectedrobotName.classList.add('robot-name');
-                            selectedrobotName.innerText = robotData.name;
-
-                            // Add the robot IP
-                            const selectedrobotIP = document.createElement('div');
-                            selectedrobotIP.classList.add('robot-ip');
-                            selectedrobotIP.innerText = `IP: ${robotData.ip}`;
-
-                            // Add elements to the selected robot card
-                            selectedrobotCard.appendChild(selectedrobotName);
-                            selectedrobotCard.appendChild(selectedrobotIP);
-
-                            // Append the selected robot card to the selectedRobotCard container
-                            selectedRobotCard.appendChild(selectedrobotCard);
+                            // Créer un clone de la carte du robot sélectionné pour l'afficher
+                            const clonedRobotCard = robotCard.cloneNode(true);
+                            selectedRobotCard.appendChild(clonedRobotCard);
 
                             // Display the selected robot card
                             selectedRobotCard.style.display = 'block';
