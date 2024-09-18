@@ -264,10 +264,8 @@
                         // Ajouter un événement de clic sur la carte
                         robotCard.addEventListener('click', function() {
 
-                            console.log(`Attempting to connect to: ${robotData.ip}`);
-                            alert(`IP address: ${robotData.ip}`);
-
                             // Send an HTTP Request to the ESP32 to establish a connection 
+                            console.log(`Attempting to connect to: http://${robotData.ip}/connect`);
                             fetch(`http://${robotData.ip}/connect`, { // This makes a GET request to the ESP32
                                 method: 'GET',
                             })
