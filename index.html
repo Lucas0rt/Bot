@@ -89,22 +89,20 @@
                 color: #555;
             }
 
-            #selected-robot-card {
-                position: absolute;
-                top: 30%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 150px;
-                height: 150px;
+            .selected-robot-card {
                 background-color: #dddddd;
                 border: 2px solid #000000;
                 border-radius: 10px;
+                margin-top: 20px;
+                padding: 20px;
+                width: 150px;
+                height: 150px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                z-index: 100; /* Ensure it's above other elements */
-                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+                transition: transform 0.5s ease;
             }
 
             .button {
@@ -278,21 +276,33 @@
                             alert(`Connecté à ${robotData.name} avec l'IP ${robotData.ip}`);
                             // Cacher la grille des robots
                             document.getElementById('robot-grid').style.display = 'none';
-                            // Afficher le panneau de contrôle après la sélection du robot
-                            document.getElementById('control-panel').style.display = 'block';
+
                             // Afficher le bouton de retour
                             backButton.style.display = 'block';
-                            // Insérer la carte du robot sélectionné dans le nouveau div
-                            const selectedRobotCard = document.getElementById('selected-robot-card');
-                            selectedRobotCard.innerHTML = `
-                                <div class="robot-card">
-                                    <div class="robot-name">${robotData.name}</div>
-                                    <div class="robot-ip">IP: ${robotData.ip}</div>
-                                </div>
-                            `;
+
+                            // Creer la carte du robot sélectionné dans le nouveau div                   
+                            const selectedrobotCard = document.createElement('div');
+                            robotCard.classList.add('selected-robot-card');
+
+                            // Ajouter le nom du robot
+                            const selectedrobotName = document.createElement('div');
+                            selectedrobotName.classList.add('robot-name');
+                            selectedrobotName.innerText = robotData.name;
+
+                            // Ajouter l'adresse IP du robot
+                            const selectedrobotIP = document.createElement('div');
+                            selectedrobotIP.classList.add('robot-ip');
+                            selectedrobotIP.innerText = `IP: ${robotData.ip}`;
+
+                            // Ajouter les éléments à la carte
+                            selectedrobotCard.appendChild(selectedrobotName);
+                            selectedrobotCard.appendChild(selectedrobotIP);
 
                             // Afficher la carte du robot sélectionné
                             selectedRobotCard.style.display = 'block';
+
+                            // Afficher le panneau de contrôle après la sélection du robot
+                            document.getElementById('control-panel').style.display = 'block';
                         });
                     }
 
