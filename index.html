@@ -263,6 +263,25 @@
 
                         // Ajouter un événement de clic sur la carte
                         robotCard.addEventListener('click', function() {
+                            
+                            //test
+                            fetch('https://jsonplaceholder.typicode.com/posts/1', {
+                                method: 'GET',
+                            })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                                }
+                                return response.json(); // Parse the response as JSON
+                            })
+                            .then(data => {
+                                console.log('Public API responded with:', data);
+                                alert(`Fetched data successfully: ${data.title}`);
+                            })
+                            .catch(error => {
+                                console.error('There was a problem with the fetch operation:', error);
+                            });
+
 
                             // Send an HTTP Request to the ESP32 to establish a connection 
                             console.log(`Attempting to connect to: http://${robotData.ip}/connect`);
